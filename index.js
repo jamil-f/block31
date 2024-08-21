@@ -13,6 +13,8 @@ app.get('/', (req, res) => {
 
 });
 
+
+
 // hello world route
 app.get('/api', (req, res) => {
     res.send('Hello World!');
@@ -20,12 +22,15 @@ app.get('/api', (req, res) => {
 
 // get all pets from the database
 app.get('/api/v1/pets', (req, res) => {
+    res.send(JSON.stringify(pets));
     // send the pets array as a response
 
 });
 
 // get pet by owner with query string
 app.get('/api/v1/pets/owner', (req, res) => {
+    const owner = req.query.owner;
+    
     // get the owner from the request
 
 
@@ -33,6 +38,7 @@ app.get('/api/v1/pets/owner', (req, res) => {
     const pet = pets.find(pet => pet.owner === owner);
 
     // send the pet as a response
+    res.json(ownerPets);
 
 });
 
@@ -45,7 +51,7 @@ app.get('/api/v1/pets/:name', (req, res) => {
     const pet = pets.find(pet => pet.name === name);
 
     // send the pet as a response
-
+    res.json(pet);
 });
 
 app.listen(PORT, () => {
